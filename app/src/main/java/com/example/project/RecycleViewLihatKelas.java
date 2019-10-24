@@ -17,21 +17,6 @@ import com.example.project.Model.LihatKelas;
 import java.util.ArrayList;
 
 public class RecycleViewLihatKelas extends AppCompatActivity {
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.menu1){
-            Intent intent = new Intent(RecycleViewLihatKelas.this,CRUDMhsActivity.class);
-            startActivity(intent);
-        }
-        return true;
-    }
 
     private ArrayList<LihatKelas>lihatKelasArrayList;
     private RecyclerView recyclerView;
