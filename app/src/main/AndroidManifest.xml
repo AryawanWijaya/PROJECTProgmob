@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuDosenAdminActivity"></activity>
+        <activity android:name=".RecycleViewLihatKelas"></activity>
+        <activity android:name=".CRUDKrs" />
+        <activity android:name=".CRUDMhsActivity" />
+        <activity android:name=".CRUDMatkul" />
+        <activity android:name=".RecycleViewMahasiswaActivity" />
+        <activity android:name=".RecycleViewMatkulActivity" />
+        <activity android:name=".RecycleViewKrsActivity" />
+        <activity android:name=".CRUDDosenAdminActivity" />
+        <activity android:name=".MenuDosenAdminActivity" />
         <activity android:name=".RecycleViewDosenActivity" />
         <activity android:name=".MenuDosenActivity" />
         <activity android:name=".SplashScreenActivity">

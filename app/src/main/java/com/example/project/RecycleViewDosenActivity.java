@@ -1,10 +1,15 @@
 package com.example.project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.project.Adapter.DosenAdapter;
 import com.example.project.Model.Dosen;
@@ -16,10 +21,29 @@ public class RecycleViewDosenActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DosenAdapter dosenAdapter;
     private ArrayList<Dosen> dosenArrayList;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.menu1){
+            Intent intent = new Intent(RecycleViewDosenActivity.this,CRUDDosenAdminActivity.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycle_view_dosen);
+        this.setTitle("SI KRS - HAI ARY - Daftar Dosen");
+
         addData();
         recyclerView =findViewById(R.id.rvDosen);
         dosenAdapter=new DosenAdapter(dosenArrayList);
