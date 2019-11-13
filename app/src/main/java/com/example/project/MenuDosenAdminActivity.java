@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,6 +40,11 @@ public class MenuDosenAdminActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences prefs = MenuDosenAdminActivity.this.getSharedPreferences("prefs_file",MODE_PRIVATE);
+                                String statusLogin = prefs.getString("isLogin",null);
+                                SharedPreferences.Editor edit = prefs.edit();
+                                edit.putString("isLogin",null);
+                                edit.commit();
                                 Intent intent = new Intent(MenuDosenAdminActivity.this,SplashScreenActivity.class);
                                 startActivity(intent);
                             }
