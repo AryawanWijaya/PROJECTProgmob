@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btnSignIn = findViewById(R.id.btnSignIn);
-        Button btnClient = findViewById(R.id.btnClient);
+
         final EditText email = findViewById(R.id.txtEmail);
         EditText pass = findViewById(R.id.txtPassword);
         this.getSupportActionBar().hide();
@@ -46,13 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnClient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MenuDosenActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 
