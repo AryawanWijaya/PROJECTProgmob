@@ -1,14 +1,57 @@
 package com.example.project.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Dosen {
-    private int fotoDosen;
-    private String NIDN;
+    @SerializedName("id")// dari attribute yang ada di API
+    @Expose
+    private String id;
+
+    @SerializedName("nama")
+    @Expose
     private String namaDosen;
-    private String gelar;
-    private String email;
+
+    @SerializedName("nidn")
+    @Expose
+    private String NIDN;
+
+    @SerializedName("alamat")
+    @Expose
     private String alamat;
 
-    public Dosen(int fotoDosen, String NIDN, String namaDosen, String gelar, String email, String alamat) {
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+    @SerializedName("gelar")
+    @Expose
+    private String gelar;
+
+    @SerializedName("foto")
+    @Expose
+    private String fotoDosen;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Dosen(String fotoDosen, String NIDN, String namaDosen, String gelar, String email, String alamat, String id) {
+        this.fotoDosen = fotoDosen;
+        this.NIDN = NIDN;
+        this.namaDosen = namaDosen;
+        this.gelar = gelar;
+        this.email = email;
+        this.alamat = alamat;
+        this.id = id;
+    }
+
+    public Dosen(String fotoDosen, String NIDN, String namaDosen, String gelar, String email, String alamat) {
         this.fotoDosen = fotoDosen;
         this.NIDN = NIDN;
         this.namaDosen = namaDosen;
@@ -17,11 +60,11 @@ public class Dosen {
         this.alamat = alamat;
     }
 
-    public int getFotoDosen() {
+    public String getFotoDosen() {
         return fotoDosen;
     }
 
-    public void setFotoDosen(int fotoDosen) {
+    public void setFotoDosen(String fotoDosen) {
         this.fotoDosen = fotoDosen;
     }
 

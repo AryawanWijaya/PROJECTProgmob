@@ -2,6 +2,9 @@ package com.example.project.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.UriMatcher;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project.CRUDDosenAdminActivity;
 import com.example.project.Model.Dosen;
 import com.example.project.R;
+import com.squareup.picasso.Picasso;
 
+import java.net.URL;
 import java.util.ArrayList;
+
+import retrofit2.http.Url;
 
 public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> {
     private  ArrayList<Dosen> dosenArrayList;
@@ -35,7 +42,13 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageViewDosen.setImageResource(dosenArrayList.get(position).getFotoDosen());
+        holder.imageViewDosen.getLayoutParams().width=150;
+        holder.imageViewDosen.getLayoutParams().height=150;
+        if(dosenArrayList.get(position).getFotoDosen()!=null){
+            Picasso.with(this.context).
+                    load(dosenArrayList.get(position).getFotoDosen())
+                    .into(holder.imageViewDosen);
+        }
         holder.txtNIDN.setText(dosenArrayList.get(position).getNIDN());
         holder.txtNamaDosen.setText(dosenArrayList.get(position).getNamaDosen());
         holder.txtGelarDosen.setText(dosenArrayList.get(position).getGelar());
