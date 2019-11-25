@@ -3,11 +3,13 @@ package com.example.project;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class CRUDMhsActivity extends AppCompatActivity {
@@ -17,7 +19,6 @@ public class CRUDMhsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crudmhs);
         this.setTitle("SI KRS - ADMIN - CRUD Mahasiswa");
-
         Button btnSimpanMhs = findViewById(R.id.btnSimpanMhsCRUD);
 
         btnSimpanMhs.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +36,7 @@ public class CRUDMhsActivity extends AppCompatActivity {
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+
                                     Intent intent = new Intent(CRUDMhsActivity.this, MenuDosenAdminActivity.class);
                                     startActivity(intent);
                                 }
