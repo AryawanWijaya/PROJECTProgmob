@@ -10,6 +10,7 @@ import java.util.List;
 //import ukdw.com.projectprogmoba.Model.DefaultResult;
 //import ukdw.com.projectprogmoba.Model.Dosen;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -37,7 +38,49 @@ public interface GetDataService {
             @Field("foto") String foto,
             @Field("nim_progmob") String nim_progmob
     );
+    @FormUrlEncoded
+    @POST("/api/progmob/dosen/createfoto")
+    Call<DefaultResult> insert_dosen_foto   (
+            @Field("nama") String nama,
+            @Field("nidn") String nidn,
+            @Field("alamat") String alamat,
+            @Field("email") String email,
+            @Field("gelar") String gelar,
+            @Field("foto") String foto,
+            @Field("nim_progmob") String nim_progmob
+    );
+    @FormUrlEncoded
+    @POST("/api/progmob/dosen/delete")
+    Call<DefaultResult>delete_dosen(
+            @Field("id") String id,
+            @Field("nim_progmob") String nim_progmob
+    );
 
+    @FormUrlEncoded
+    @POST("api/progmob/dosen/update")
+    Call<DefaultResult>update_dosen(
+            @Field("id") String id,
+            @Field("nama") String nama,
+            @Field("nidn") String nidn,
+            @Field("alamat") String alamat,
+            @Field("email") String email,
+            @Field("gelar") String gelar,
+            @Field("foto") String foto,
+            @Field("nim_progmob") String nim_progmob
+    );
+
+    @FormUrlEncoded
+    @POST("api/progmob/dosen/updatewithfoto")
+    Call<DefaultResult>update_dosen_foto(
+            @Field("id") String id,
+            @Field("nama") String nama,
+            @Field("nidn") String nidn,
+            @Field("alamat") String alamat,
+            @Field("email") String email,
+            @Field("gelar") String gelar,
+            @Field("foto") String foto,
+            @Field("nim_progmob") String nim_progmob
+    );
     /*@FormUrlEncoded
     @POST("/si_mapping/api/user_login.php")
     Call<UserLogin> getUserLogin(

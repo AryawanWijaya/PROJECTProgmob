@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.UriMatcher;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,9 @@ import java.util.ArrayList;
 
 import retrofit2.http.Url;
 
-public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> {
+public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder>
+     {
+
     private  ArrayList<Dosen> dosenArrayList;
     private Context context;
     public DosenAdapter (ArrayList<Dosen>dosenArrayList){
@@ -46,7 +49,7 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
         holder.imageViewDosen.getLayoutParams().height=150;
         if(dosenArrayList.get(position).getFotoDosen()!=null){
             Picasso.with(this.context).
-                    load(dosenArrayList.get(position).getFotoDosen())
+                    load("https://kpsi.fti.ukdw.ac.id/progmob/"+dosenArrayList.get(position).getFotoDosen())
                     .into(holder.imageViewDosen);
         }
         holder.txtNIDN.setText(dosenArrayList.get(position).getNIDN());
@@ -70,7 +73,8 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
         return (dosenArrayList !=null)?dosenArrayList.size():0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder
+            implements View.OnCreateContextMenuListener{
         private ImageView imageViewDosen;
         private CardView cv;
         private TextView txtNIDN,txtNamaDosen,txtGelarDosen,txtEmailDosen,txtAlamatDosen;
@@ -83,8 +87,16 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder> 
             txtEmailDosen = view.findViewById(R.id.txtEmailDosen);
             txtAlamatDosen = view.findViewById(R.id.txtAlamatDosen);
             cv=view.findViewById(R.id.cvDosen);
+            view.setOnCreateContextMenuListener(this);
         }
-}
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("PILIH AKSI");
+            menu.add(this.getAdapterPosition(),v.getId(),0,"UBAH DATA");
+            menu.add(this.getAdapterPosition(),v.getId(),0,"HAPUS DATA");
+        }
+    }
 
 
 
