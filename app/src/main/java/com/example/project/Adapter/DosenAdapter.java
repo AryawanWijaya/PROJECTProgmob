@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.net.URL;
 import java.util.ArrayList;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import retrofit2.http.Url;
 
 public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder>
@@ -50,6 +51,7 @@ public class DosenAdapter extends RecyclerView.Adapter<DosenAdapter.ViewHolder>
         if(dosenArrayList.get(position).getFotoDosen()!=null){
             Picasso.with(this.context).
                     load("https://kpsi.fti.ukdw.ac.id/progmob/"+dosenArrayList.get(position).getFotoDosen())
+                    .transform(new CropCircleTransformation())//pakai library tambahan jp.picasso di gradle-> utk ubah bentuk gambar crop lingkaran
                     .into(holder.imageViewDosen);
         }
         holder.txtNIDN.setText(dosenArrayList.get(position).getNIDN());

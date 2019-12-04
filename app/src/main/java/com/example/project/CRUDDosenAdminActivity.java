@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-//import android.telecom.Call;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -22,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +32,8 @@ import androidx.loader.content.CursorLoader;
 import com.example.project.Model.DefaultResult;
 import com.example.project.Network.GetDataService;
 import com.example.project.Network.RetrofitClientInstance;
+import com.squareup.picasso.Picasso;
+
 import retrofit2.Call;
 
 import java.io.ByteArrayOutputStream;
@@ -42,14 +44,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CRUDDosenAdminActivity extends AppCompatActivity {
-    private static final int PICK_IMAGE = 1;
-    private static final int PERMISSION_REQUEST_STORAGE = 2;
+    private static final int PICK_IMAGE = 58; // bebas asal nanti dipakai terus di activity yang laen, utk cek permissionnya
+    private static final int PERMISSION_REQUEST_STORAGE = 58;
+    private static final int    GALERY_REQUEST_CODE =58;
     private Uri uri;
     ProgressDialog progressDialog;
     private EditText namaDosen,nidnDosen,alamatDosen,emailDosen,gelarDosen,fotoDosen;
     private Button btnSimpan,btnBrowse;
     private ImageView imgThumb;
     private   String encodedImageData;
+    private String  stringImg;
 
     Boolean isUpdate=false;
     String idDosen;
@@ -66,6 +70,9 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
         emailDosen.setText(extras.getString("email"));
         gelarDosen.setText(extras.getString("gelar"));
         fotoDosen.setText(extras.getString("foto"));
+        Picasso.with(this).
+                load("https://kpsi.fti.ukdw.ac.id/progmob/"+extras.get("foto"))
+                .into(imgThumb);
 
     }
 
@@ -118,7 +125,8 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
                                             alamatDosen.getText().toString(),
                                             emailDosen.getText().toString(),
                                             gelarDosen.getText().toString(),
-                                            encodedImageData,
+                                            stringImg,
+//                                            encodedImageData,
                                             "72170115"
                                     );
                                     call.enqueue(new Callback<DefaultResult>() {
@@ -150,7 +158,8 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
                                             alamatDosen.getText().toString(),
                                             emailDosen.getText().toString(),
                                             gelarDosen.getText().toString(),
-                                            encodedImageData,
+                                            stringImg,
+//                                            encodedImageData,
                                             "72170115"
                                     );
                                     call.enqueue(new Callback<DefaultResult>() {
@@ -184,8 +193,8 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
+//--------------------------------------metode ary------------------------------------------
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -208,10 +217,42 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            switch (requestCode){
+                case GALERY_REQUEST_CODE:
+                    Uri selectedImage = data.getData();
+                    imgThumb.setImageURI(selectedImage);
+
+                    //dptin real pathynya
+                    String [] filePathColumn ={MediaStore.Images.Media.DATA};
+
+                    Cursor cursor = getContentResolver().query(selectedImage,
+                            filePathColumn,null,null,null);
+                    cursor.moveToFirst();
+                    int columnIndex= cursor.getColumnIndex(filePathColumn[0]);
+                    String imgDecodableString = cursor.getString(columnIndex);
+                    fotoDosen.setText(imgDecodableString);
+                    cursor.close();
+
+                    //conversi ke base 64
+                    Bitmap bm = BitmapFactory.decodeFile(imgDecodableString);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte [] b = baos.toByteArray();
+
+                    stringImg=Base64.encodeToString(b,Base64.DEFAULT);
+            }
+        }
     }
 
     //----------------------------metode untuk converd uri ke string path--------------------------------------------
-
+    //------------------------------klo pake metode pak argo ndak kepake ini ---------------------------------------
     @SuppressLint("ObsoleteSdkInt")
     private String getRealPathFromURI(Uri contentURI) {
 
@@ -259,6 +300,7 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
         return realPath;
     }
     //----------------------------metode untuk converd gambar--------------------------------------------
+    //------------------------------klo pake metode pak argo ndak kepake ini -----------------------------
     public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
@@ -268,13 +310,18 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
 
         return imgString;
     }
-    //----------------------------permission buka galery--------------------------------------------
+
+    //----------------------------untuk pilih gambar----------------------------------
     private void choosePhoto() {
+        //----------------------------untuk permission buka galery--> bisa juga ditaruh di oncrete----------------------------------
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+               /* && ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED*/) {
+            // read utk baca dari hp
+            //write utk ambil dari luar
 
+            //ini beri permmisionnya kalau blom ada
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     PERMISSION_REQUEST_STORAGE);
@@ -285,9 +332,32 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
     }
     //----------------------------Buka galery--------------------------------------------
     public void openGallery(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
+        //------------------------------klo pake metode pak argo ndak kepake ini -----------------
+       /* Intent intent = new Intent();
+        intent.setType("image/*"); //filter hanya buka explore galery
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);*/
+
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        String[] mimeTypes={"image/jpeg"}; // filter hanya file jpeg yang ada
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+        startActivityForResult(intent,GALERY_REQUEST_CODE);
+    }
+
+
+    //------------------buat tangkap apa yang harus dilakukan setelah kita allow akses/ cek permmision yang ada di metodchoose foto-----
+    // cth kegunaan if granted open galery --> dalam kasus ini tidak dipakai
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case PERMISSION_REQUEST_STORAGE:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    //permession granted
+                }
+                break;
+        }
     }
 }
