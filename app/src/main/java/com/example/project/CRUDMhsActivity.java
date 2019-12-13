@@ -65,18 +65,30 @@ public class CRUDMhsActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(txtNama)) {
             nama.setError("Nama Tidak Boleh Kosong");
             isValid = false;
+        }else
+        {
+            isValid=true;
         }
         if (TextUtils.isEmpty(txtNim)) {
             nim.setError("Nim Tidak Boleh Kosong");
             isValid = false;
+        }else
+        {
+            isValid=true;
         }
         if (TextUtils.isEmpty(txtAlamat)) {
             alamat.setError("Alamat Tidak Boleh Kosong");
             isValid = false;
+        }else
+        {
+            isValid=true;
         }
         if (TextUtils.isEmpty(txtEmail)) {
             email.setError("Email Tidak Boleh Kosong");
             isValid = false;
+        }else
+        {
+            isValid=true;
         }
         return isValid;
     }

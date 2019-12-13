@@ -242,22 +242,37 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
        if(TextUtils.isEmpty(txtNama)){
            namaDosen.setError("Nama Tidak Boleh Kosong");
            isValid=false;
+       }else
+       {
+           isValid=true;
        }
        if(TextUtils.isEmpty(txtNidn)){
            nidnDosen.setError("Nidn Tidak Boleh Kosong");
            isValid=false;
+       }else
+       {
+           isValid=true;
        }
        if(TextUtils.isEmpty(txtAlamat)){
            alamatDosen.setError("Alamat Tidak Boleh Kosong");
            isValid=false;
+       }else
+       {
+           isValid=true;
        }
        if (TextUtils.isEmpty(txtEmail)){
            emailDosen.setError("Email Tidak Boleh Kosong");
            isValid=false;
+       }else
+       {
+           isValid=true;
        }
        if(TextUtils.isEmpty(txtGelar)){
            gelarDosen.setError("Gelar Tidak Boleh Kosong");
            isValid=false;
+       }else
+       {
+           isValid=true;
        }
 
        return isValid;
