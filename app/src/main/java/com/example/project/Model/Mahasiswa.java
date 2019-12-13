@@ -1,14 +1,35 @@
 package com.example.project.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Mahasiswa {
-    private int imgMhs;
+    @SerializedName("id")
+    @Expose
+    private String id;
+
+    @SerializedName("foto")
+    @Expose
+    private String imgMhs;
+
+    @SerializedName("nim")
+    @Expose
     private String NIM;
+
+    @SerializedName("nama")
+    @Expose
     private String namaMhs;
+
+    @SerializedName("email")
+    @Expose
     private String emailMhs;
+
+    @SerializedName("alamat")
+    @Expose
     private String alamaMhs;
 
-
-    public Mahasiswa(int imgMhs, String NIM, String namaMhs, String emailMhs, String alamaMhs) {
+    public Mahasiswa(String id, String imgMhs, String NIM, String namaMhs, String emailMhs, String alamaMhs) {
+        this.id = id;
         this.imgMhs = imgMhs;
         this.NIM = NIM;
         this.namaMhs = namaMhs;
@@ -16,11 +37,27 @@ public class Mahasiswa {
         this.alamaMhs = alamaMhs;
     }
 
-    public int getImgMhs() {
+    public Mahasiswa(String imgMhs, String NIM, String namaMhs, String emailMhs, String alamaMhs) {
+        this.imgMhs = imgMhs;
+        this.NIM = NIM;
+        this.namaMhs = namaMhs;
+        this.emailMhs = emailMhs;
+        this.alamaMhs = alamaMhs;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImgMhs() {
         return imgMhs;
     }
 
-    public void setImgMhs(int imgMhs) {
+    public void setImgMhs(String imgMhs) {
         this.imgMhs = imgMhs;
     }
 

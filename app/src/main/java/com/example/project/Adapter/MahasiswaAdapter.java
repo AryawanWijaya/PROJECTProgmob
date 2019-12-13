@@ -2,6 +2,7 @@ package com.example.project.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,11 @@ import com.example.project.CRUDKrs;
 import com.example.project.CRUDMhsActivity;
 import com.example.project.Model.Mahasiswa;
 import com.example.project.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.ViewHolder> {
     private ArrayList<Mahasiswa> mahasiswaArrayList;
@@ -39,7 +43,14 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageView.setImageResource(mahasiswaArrayList.get(position).getImgMhs());
+        holder.imageView.getLayoutParams().height=150;
+        holder.imageView.getLayoutParams().width=150;
+        if(mahasiswaArrayList.get(position).getImgMhs()!=null){
+            Picasso.with(this.context)
+                    .load("https://kpsi.fti.ukdw.ac.id/progmob/"+mahasiswaArrayList.get(position).getImgMhs())
+                    .transform(new CropCircleTransformation())
+                    .into(holder.imageView);
+        }
         holder.txtNIM.setText(mahasiswaArrayList.get(position).getNIM());
         holder.txtNamaMhs.setText(mahasiswaArrayList.get(position).getNamaMhs());
         holder.txtEmailMhs.setText(mahasiswaArrayList.get(position).getEmailMhs());
@@ -61,7 +72,9 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+            implements View.OnCreateContextMenuListener{
+
         private ImageView imageView;
         private TextView txtNIM, txtNamaMhs,txtEmailMhs,txtAlamatMhs;
         private CardView cv;
@@ -74,6 +87,14 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
             txtEmailMhs=view.findViewById(R.id.txtEmailMhsAdmin);
             txtAlamatMhs=view.findViewById(R.id.txtAlamatMhsAdmin);
             cv=view.findViewById(R.id.cvMhs);
+            view.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("PILIH AKSI");
+            menu.add(this.getAdapterPosition(),v.getId(),0,"UBAH DATA");
+            menu.add(this.getAdapterPosition(),v.getId(),0,"HAPUS DATA");
         }
     }
 }

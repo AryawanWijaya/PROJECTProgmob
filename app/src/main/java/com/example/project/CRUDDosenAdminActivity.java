@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,8 @@ import com.example.project.Network.GetDataService;
 import com.example.project.Network.RetrofitClientInstance;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 
 import java.io.ByteArrayOutputStream;
@@ -50,11 +53,12 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
     private Uri uri;
     ProgressDialog progressDialog;
     private EditText namaDosen,nidnDosen,alamatDosen,emailDosen,gelarDosen,fotoDosen;
+    private String txtNama,txtNidn,txtAlamat,txtEmail,txtGelar;
     private Button btnSimpan,btnBrowse;
     private ImageView imgThumb;
     private   String encodedImageData;
     private String  stringImg;
-
+    Boolean isValid=true;
     Boolean isUpdate=false;
     String idDosen;
     void checkUpdate(){
@@ -100,91 +104,100 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(CRUDDosenAdminActivity.this);
-                builder.setMessage("Apakah anda yakin akan menyimpan data? ")
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(CRUDDosenAdminActivity.this, "Data tidak tersimpan",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (!isUpdate) {
-                                    progressDialog = new ProgressDialog(CRUDDosenAdminActivity.this);
-                                    progressDialog.setMessage("Sabar ya masih nyimpan data");
-                                    progressDialog.show();
-
-                                    GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-                                    retrofit2.Call<DefaultResult> call = service.insert_dosen_foto(
-                                            namaDosen.getText().toString(),
-                                            nidnDosen.getText().toString(),
-                                            alamatDosen.getText().toString(),
-                                            emailDosen.getText().toString(),
-                                            gelarDosen.getText().toString(),
-                                            stringImg,
-//                                            encodedImageData,
-                                            "72170115"
-                                    );
-                                    call.enqueue(new Callback<DefaultResult>() {
-                                        @Override
-                                        public void onResponse(retrofit2.Call<DefaultResult> call, Response<DefaultResult> response) {
-                                            progressDialog.dismiss();
-                                            Toast.makeText(CRUDDosenAdminActivity.this, "Data tersimpan",
-                                                    Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(CRUDDosenAdminActivity.this, RecycleViewDosenActivity.class);
-                                            startActivity(intent);
-                                        }
-
-                                        @Override
-                                        public void onFailure(retrofit2.Call<DefaultResult> call, Throwable t) {
-                                            Toast.makeText(CRUDDosenAdminActivity.this, "Data TIDAK tersimpan",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                } else {
-                                    progressDialog = new ProgressDialog(CRUDDosenAdminActivity.this);
-                                    progressDialog.setMessage("Sabar ya masih nyimpan data");
-                                    progressDialog.show();
-
-                                    GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-                                    retrofit2.Call<DefaultResult> call = service.update_dosen_foto(
-                                            idDosen,
-                                            namaDosen.getText().toString(),
-                                            nidnDosen.getText().toString(),
-                                            alamatDosen.getText().toString(),
-                                            emailDosen.getText().toString(),
-                                            gelarDosen.getText().toString(),
-                                            stringImg,
-//                                            encodedImageData,
-                                            "72170115"
-                                    );
-                                    call.enqueue(new Callback<DefaultResult>() {
-                                        @Override
-                                        public void onResponse(retrofit2.Call<DefaultResult> call, Response<DefaultResult> response) {
-                                            progressDialog.dismiss();
-                                            Toast.makeText(CRUDDosenAdminActivity.this, "Data tersimpan",
-                                                    Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(CRUDDosenAdminActivity.this, RecycleViewDosenActivity.class);
-                                            startActivity(intent);
-                                        }
-
-                                        @Override
-                                        public void onFailure(retrofit2.Call<DefaultResult> call, Throwable t) {
-                                            Toast.makeText(CRUDDosenAdminActivity.this, "Data TIDAK tersimpan",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                validasiInput();
+                if(isValid){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CRUDDosenAdminActivity.this);
+                    builder.setMessage("Apakah anda yakin akan menyimpan data? ")
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(CRUDDosenAdminActivity.this, "Data tidak tersimpan",
+                                            Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                            })
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (!isUpdate) {
+
+                                        progressDialog = new ProgressDialog(CRUDDosenAdminActivity.this);
+                                        progressDialog.setMessage("Sabar ya masih nyimpan data");
+                                        progressDialog.show();
+
+                                        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+                                        retrofit2.Call<DefaultResult> call = service.insert_dosen_foto(
+                                                namaDosen.getText().toString(),
+                                                nidnDosen.getText().toString(),
+                                                alamatDosen.getText().toString(),
+                                                emailDosen.getText().toString(),
+                                                gelarDosen.getText().toString(),
+                                                stringImg,
+//                                            encodedImageData,
+                                                "72170115"
+                                        );
+                                        call.enqueue(new Callback<DefaultResult>() {
+                                            @Override
+                                            public void onResponse(retrofit2.Call<DefaultResult> call, Response<DefaultResult> response) {
+                                                progressDialog.dismiss();
+                                                Toast.makeText(CRUDDosenAdminActivity.this, "Data tersimpan",
+                                                        Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(CRUDDosenAdminActivity.this, RecycleViewDosenActivity.class);
+                                                startActivity(intent);
+                                            }
+
+                                            @Override
+                                            public void onFailure(retrofit2.Call<DefaultResult> call, Throwable t) {
+                                                Toast.makeText(CRUDDosenAdminActivity.this, "Data TIDAK tersimpan",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                    }else {
+
+                                        progressDialog = new ProgressDialog(CRUDDosenAdminActivity.this);
+                                        progressDialog.setMessage("Sabar ya masih nyimpan data");
+                                        progressDialog.show();
+
+                                        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+                                        retrofit2.Call<DefaultResult> call = service.update_dosen_foto(
+                                                idDosen,
+                                                namaDosen.getText().toString(),
+                                                nidnDosen.getText().toString(),
+                                                alamatDosen.getText().toString(),
+                                                emailDosen.getText().toString(),
+                                                gelarDosen.getText().toString(),
+                                                stringImg,
+//                                            encodedImageData,
+                                                "72170115"
+                                        );
+                                        call.enqueue(new Callback<DefaultResult>() {
+                                            @Override
+                                            public void onResponse(retrofit2.Call<DefaultResult> call, Response<DefaultResult> response) {
+                                                progressDialog.dismiss();
+                                                Toast.makeText(CRUDDosenAdminActivity.this, "Data tersimpan",
+                                                        Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(CRUDDosenAdminActivity.this, RecycleViewDosenActivity.class);
+                                                startActivity(intent);
+                                            }
+
+                                            @Override
+                                            public void onFailure(retrofit2.Call<DefaultResult> call, Throwable t) {
+                                                Toast.makeText(CRUDDosenAdminActivity.this, "Data TIDAK tersimpan",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }
+
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
             }
         });
+
+
 //----------------------------btn cari foto--------------------------------------------
         btnBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +232,36 @@ public class CRUDDosenAdminActivity extends AppCompatActivity {
         }
     }*/
 
+   public boolean validasiInput(){
+       txtNama=namaDosen.getText().toString();
+       txtNidn=nidnDosen.getText().toString();
+       txtAlamat=alamatDosen.getText().toString();
+       txtEmail=emailDosen.getText().toString();
+       txtGelar=gelarDosen.getText().toString();
+
+       if(TextUtils.isEmpty(txtNama)){
+           namaDosen.setError("Nama Tidak Boleh Kosong");
+           isValid=false;
+       }
+       if(TextUtils.isEmpty(txtNidn)){
+           nidnDosen.setError("Nidn Tidak Boleh Kosong");
+           isValid=false;
+       }
+       if(TextUtils.isEmpty(txtAlamat)){
+           alamatDosen.setError("Alamat Tidak Boleh Kosong");
+           isValid=false;
+       }
+       if (TextUtils.isEmpty(txtEmail)){
+           emailDosen.setError("Email Tidak Boleh Kosong");
+           isValid=false;
+       }
+       if(TextUtils.isEmpty(txtGelar)){
+           gelarDosen.setError("Gelar Tidak Boleh Kosong");
+           isValid=false;
+       }
+
+       return isValid;
+   }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

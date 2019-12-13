@@ -2,6 +2,7 @@ package com.example.project.Network;
 
 import com.example.project.Model.DefaultResult;
 import com.example.project.Model.Dosen;
+import com.example.project.Model.Mahasiswa;
 
 
 import java.util.ArrayList;
@@ -81,6 +82,39 @@ public interface GetDataService {
             @Field("foto") String foto,
             @Field("nim_progmob") String nim_progmob
     );
+
+    @GET("/api/progmob/mhs/{nim_progmob}")
+    Call<ArrayList<Mahasiswa>> getMahasiswa(@Path("nim_progmob") String nim_progmob);
+
+    @FormUrlEncoded
+    @POST("/api/progmob/mhs/delete")
+    Call<DefaultResult>delete_mhs(
+            @Field("id") String id,
+            @Field("nim_progmob") String nim_progmob
+    );
+    @FormUrlEncoded
+    @POST("/api/progmob/mhs/create")
+    Call<DefaultResult> add_mhs(
+            @Field("nama") String nama,
+            @Field("nim") String nim,
+            @Field("alamat") String alamat,
+            @Field("email") String email,
+            @Field("foto") String foto,
+            @Field("nim_progmob") String nim_progmob
+    );
+    @FormUrlEncoded
+    @POST("/api/progmob/mhs/update")
+    Call<DefaultResult>update_mhs(
+            @Field("id") String id,
+            @Field("nama") String nama,
+            @Field("nim") String nim,
+            @Field("alamat") String alamat,
+            @Field("email") String email,
+            @Field("foto") String foto,
+            @Field("nim_progmob") String nim_progmob
+    );
+
+
     /*@FormUrlEncoded
     @POST("/si_mapping/api/user_login.php")
     Call<UserLogin> getUserLogin(
