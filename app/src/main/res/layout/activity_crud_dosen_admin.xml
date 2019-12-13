@@ -20,11 +20,30 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Nama Dosen"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtNamaDosenCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--<TextView
                 android:id="@+id/txtNamaDosenCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +57,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -49,7 +68,25 @@
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="NIDN Dosen"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtNIDNDosenCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+           <!-- <TextView
                 android:id="@+id/txtNIDNCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +100,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +111,26 @@
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Alamat Dosen"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtAlamatDosenCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--<TextView
                 android:id="@+id/txtAlamatDosenCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +144,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +155,26 @@
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Email Dosen"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtEmailDosenCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--<TextView
                 android:id="@+id/txtEmailDosenCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +188,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -124,7 +199,26 @@
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Gelar Dosen"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtGelarDosenCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+           <!-- <TextView
                 android:id="@+id/txtGelarDosenCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,7 +232,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -149,7 +243,26 @@
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Foto Dosen"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtFotoDosenCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+           <!-- <TextView
                 android:id="@+id/txtFotoDosenCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -163,15 +276,16 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
 
-            <Button
-                android:id="@+id/btnBrowseFotoCRUD"
-                android:layout_width="41dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:text="Browse..." />
+
         </LinearLayout>
+        <Button
+            android:id="@+id/btnBrowseFotoCRUD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Browse..." />
 
         <Button
             android:id="@+id/btnSimpanDosenCRUD"

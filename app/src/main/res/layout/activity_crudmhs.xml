@@ -10,21 +10,38 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="109dp">
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Nama Mahasiswa"
+                tools:ignore="MissingConstraints">
 
-            <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtNamaMhsCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--<TextView
                 android:id="@+id/txtNamaMhsCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +55,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -49,7 +66,25 @@
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="NIM Mahasiswa"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtNIMCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+           <!-- <TextView
                 android:id="@+id/txtNIMCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +98,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -73,8 +108,25 @@
             android:layout_marginTop="1dp"
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Alamat Mahasiswa"
+                tools:ignore="MissingConstraints">
 
-            <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtAlamatMhsCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+           <!-- <TextView
                 android:id="@+id/txtAlamatMhsCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +140,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +151,25 @@
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Email Mahasiswa"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtEmailMhsCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--<TextView
                 android:id="@+id/txtEmailMhsCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +183,7 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -123,8 +193,26 @@
             android:layout_marginTop="1dp"
             android:layout_marginRight="30dp"
             android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Foto Mahasiswa"
+                tools:ignore="MissingConstraints">
 
-            <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtxtFotoMhsCRUD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:inputType="textPersonName"
+                    android:text="" /> />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--<TextView
                 android:id="@+id/txtFotoMhsCRUD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,18 +226,24 @@
                 android:layout_weight="1"
                 android:ems="1"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:text="" />-->
 
-            <Button
+            <!--<Button
                 android:id="@+id/btnBrowseFotoMhs"
                 android:layout_width="41dp"
                 android:layout_height="45dp"
                 android:layout_weight="1"
-                android:text="Browse..." />
+                android:text="Browse..." />-->
         </LinearLayout>
 
-
         <Button
+            android:id="@+id/btnBrowseFotoMhs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Browse..." />
+        <Button
+
             android:id="@+id/btnSimpanMhsCRUD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,9 +264,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-<!--<com.google.android.material.textfield.TextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-</com.google.android.material.textfield.TextInputLayout>-->
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
